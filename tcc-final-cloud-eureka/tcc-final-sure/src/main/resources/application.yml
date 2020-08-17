@@ -1,0 +1,27 @@
+server:
+  port: 8877
+  keepAliveTimeOut: 500000 
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${eureka.serviceUrl:http://127.0.0.1:8761/eureka/}
+    healthcheck:
+      enabled: true
+
+feign:
+  httpclient:
+      enabled: false
+  okhttp:
+      enabled: true
+  hystrix:
+    enable: true
+    
+spring:
+    profiles:
+      active: dev
+    application:
+      name: tcc-final-sure
+ 
+
+

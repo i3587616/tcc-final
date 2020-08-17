@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.tcc.cloud.pay.dao.AccountPayTccfinalMapper">
+	 <resultMap id="BaseResultMap" type="org.tcc.cloud.pay.dao.AccountPayTccfinal" >
+			 <result column="id" property="id" />
+			 <result column="account_no" property="accountNo" />
+			 <result column="pay_amount" property="payAmount" />
+			 <result column="tcc_id" property="tccId" />
+			 <result column="version" property="version" />
+			 <result column="status" property="status" />
+			 <result column="create_time" property="createTime" />
+			 <result column="update_time" property="updateTime" />
+   </resultMap>
+	<!--表名 -->
+	<sql id="tableName">
+		account_pay_tccfinal
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+    			id
+    			,account_no
+    			,pay_amount
+    			,tcc_id
+    			,version
+    			,status
+    			,create_time
+    			,update_time
+	</sql>
+	
+	
+	<!-- 值 -->
+	<sql id="FieldValue">
+    			#{id}
+    			,#{accountNo}
+    			,#{payAmount}
+    			,#{tccId}
+    			,#{version}
+    			,#{status}
+    			,#{createTime}
+    			,#{updateTime}
+	</sql>
+	
+	<!-- 通过主键获得对象 -->
+	<select id="getByTccId" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+			where tcc_id=#{tccId}
+	</select>
+
+	<!-- 新增-->
+	<insert id="save" parameterType="org.tcc.cloud.pay.dao.AccountPayTccfinal" useGeneratedKeys="true" keyProperty="Id">
+		insert into 
+		<include refid="tableName"></include>
+			(
+		    			
+		    			account_no
+		    			,pay_amount
+		    			,tcc_id
+		    			,status
+			) values (
+		    			
+		    			#{accountNo}
+		    			,#{payAmount}
+		    			,#{tccId}
+		    			,#{status}
+			)
+	</insert>
+	
+ 	<!-- 更新-->
+	<update id="updateByVer" parameterType="org.tcc.cloud.pay.dao.AccountPayTccfinal" >
+	    update 
+		<include refid="tableName"></include>
+	      set  
+	      	 id=#{id}
+				 <if test="accountNo!= null"><!-- 关键词检索 -->
+			 		,account_no=#{accountNo}
+				 </if>
+				 <if test="payAmount!= null"><!-- 关键词检索 -->
+			 		,pay_amount=#{payAmount}
+				 </if>
+				 <if test="tccId!= null"><!-- 关键词检索 -->
+			 		,tcc_id=#{tccId}
+				 </if>
+						,version = version + 1
+				 <if test="status!= null"><!-- 关键词检索 -->
+			 		,status=#{status}
+				 </if>
+	    where 
+			 id=#{id} and version = #{version}
+ 	</update>
+</mapper>
