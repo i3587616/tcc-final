@@ -55,7 +55,7 @@ tcc-final-cloud-eureka
 #### 使用说明
 
     一个完整的分布式业务流程就是一个ucc。其try尝试执行，如try能通过，则confirm一定能正常执行通过。如果try无法执行通过，则cancel一定
-    能正常执行通过。保证的是最终一致性，try,confirm,cancel通过tcc_id来保证幂等性。try是尝试执行，并记录业务信息，confirm是确认，cancel
+    能正常执行通过。保证的是最终一致性。try是尝试执行，并记录业务信息，confirm是确认，cancel
     是回退到最初，confirm、cancel都是通过try记录的业务信息来执行的。
      
     eg。一个简单的业务，账户支付、账户加积分，最终一起成功或失败。 支付10元，加100积分。则try方法为支付账户里减10元，积分账户不动，并在 
